@@ -1,11 +1,14 @@
 class Repo {
   String name;
   String htmlURL;
-
-  Repo({this.name = '', this.htmlURL = ''});
+  String description;
+  Repo({this.name = '', this.htmlURL = '', this.description = ''});
 
   factory Repo.fromJson(Map<String, dynamic> json) {
-    return Repo(name: json['name'], htmlURL: json['html_url']);
+    return Repo(
+        name: json['name'],
+        htmlURL: json['html_url'],
+        description: json['description']);
   }
 }
 
