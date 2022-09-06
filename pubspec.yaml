@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   http: ^0.13.3
+  sqflite: ^1.0.3+1
+  path_provider: ^1.0.11
   
     
 
