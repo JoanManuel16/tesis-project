@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tesis_proyect/class/repos.dart';
+import 'package:tesis_proyect/class/models/tesisModel.dart';
 import 'package:http/http.dart' as http;
 
 Future<All> fetchRepos() async {
@@ -16,14 +16,14 @@ Future<All> fetchRepos() async {
   }
 }
 
-class reposToShow extends StatefulWidget {
-  reposToShow({Key? key}) : super(key: key);
+class ReposToShow extends StatefulWidget {
+  ReposToShow({Key? key}) : super(key: key);
 
   @override
   _ReposToShowState createState() => _ReposToShowState();
 }
 
-class _ReposToShowState extends State<reposToShow> {
+class _ReposToShowState extends State<ReposToShow> {
   Future<All> futureRepo = fetchRepos();
   @override
   void initState() {
@@ -40,9 +40,9 @@ class _ReposToShowState extends State<reposToShow> {
             future: futureRepo,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Repo> reposToShow = List.empty(growable: true);
+                List<TesisModel> reposToShow = List.empty(growable: true);
                 for (var i = 0; i < snapshot.data!.repos!.length; i++) {
-                  reposToShow.add(Repo(
+                  reposToShow.add(TesisModel(
                       name: snapshot.data!.repos![i].name,
                       htmlURL: snapshot.data!.repos![i].htmlURL));
                 }

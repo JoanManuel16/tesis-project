@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tesis_proyect/class/Repositorios.dart';
-import 'dart:convert';
-import 'package:tesis_proyect/class/repos.dart';
-import 'package:http/http.dart' as http;
+import 'package:tesis_proyect/class/frames/reposToShow.dart';
 
 // contrasena del gmail
 //VzejEmk9Y9CzWEW
@@ -36,7 +33,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  List<Widget> listaOpciones = [reposToShow(), Text('2'), Text('3')];
+  List<Widget> listaOpciones = [ReposToShow(), Text('2'), Text('3')];
 
   Widget build(BuildContext context) {
     return Scaffold(
