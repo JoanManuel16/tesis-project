@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tesis_proyect/class/models/tesisModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:tesis_proyect/class/providers/db_provider.dart';
+import 'package:tesis_proyect/class/widgets/tesis_option_list.dart';
 
 Future<All> fetchRepos() async {
   final response =
@@ -44,36 +46,13 @@ class _ReposToShowState extends State<ReposToShow> {
                 for (var i = 0; i < snapshot.data!.repos!.length; i++) {
                   reposToShow.add(TesisModel(
                       name: snapshot.data!.repos![i].name,
-                      htmlURL: snapshot.data!.repos![i].htmlURL));
+                      htmlURL: snapshot.data!.repos![i].htmlURL,
+                      description: snapshot.data!.repos![i].description));
+                  DBProvider.db
+                      .insertTesis(reposToShow[reposToShow.length - 1]);
                 }
 
-                return ListView(
-                  children: reposToShow
-                      .map((r) => ListTile(
-                            title: Column(
-                              children: [Text(r.name), Text(r.htmlURL)],
-                            ),
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: new Text(r.name),
-                                  content: new Text(r.description),
-                                  actions: <Widget>[
-                                    // usually buttons at the bottom of the dialog
-                                    new TextButton(
-                                      child: new Text("Close"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ))
-                      .toList(),
-                );
+                return TesisOptionList(reposToShow, context);
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text('Error!!'),

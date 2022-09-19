@@ -1,8 +1,33 @@
 class TesisModel {
-  String name;
-  String htmlURL;
-  String description;
-  TesisModel({this.name = '', this.htmlURL = '', this.description = ''});
+  String name = '';
+  String htmlURL = '';
+  String description = '';
+  String institucion = '';
+  String facultad = '';
+  String carrera = '';
+  List<String> autores = [];
+  List<String> tutores = [];
+  String fecha = '';
+  String resumen = '';
+
+  TesisModel({String name = '', String htmlURL = '', String description = ''}) {
+    this.name = name;
+    this.htmlURL = htmlURL;
+    this.description = description;
+
+    String opciones = description;
+    opciones.split("#");
+    institucion = opciones[2];
+    facultad = opciones[3];
+    carrera = opciones[4];
+    String aut = opciones[5];
+    String tut = opciones[6];
+    fecha = opciones[7];
+    resumen = opciones[8];
+
+    autores = aut.split('\n');
+    tutores = tut.split('\n');
+  }
 
   factory TesisModel.fromJson(Map<String, dynamic> json) {
     return TesisModel(
