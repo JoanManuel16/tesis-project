@@ -6,22 +6,7 @@ import 'package:path/path.dart';
 import 'package:tesis_proyect/class/models/tesisModel.dart';
 
 class DBProvider {
-  static late Database _database;
-  static final DBProvider db = DBProvider._();
-
-  DBProvider._();
-
-  Future<Database> get database async {
-    if (_database != null) {
-      return _database;
-    } else {
-      _database = await initDB();
-
-      return _database;
-    }
-  }
-
-  initDB() async {
+  static initDB() async {
     Directory Document = await getApplicationDocumentsDirectory();
 
     String path = join(Document.path, 'database/tesisDB.db');
@@ -33,8 +18,8 @@ class DBProvider {
     );
   }
 
-  insertTesis(TesisModel tesis) async {
-    final db = await database;
+  static insertTesis(TesisModel tesis) async {
+    final Database db = await initDB();
 
     var res = await db.rawInsert(
         "insert into tesis values (null, '${tesis.name}', '${tesis.institucion}', '${tesis.facultad}', '${tesis.carrera}', '${tesis.fecha}', '${tesis.resumen}')");
@@ -53,7 +38,7 @@ class DBProvider {
 
   Future<TesisModel> obtainTesis(
       String name, String institucion, String carrera, String fecha) async {
-    final db = await database;
+    final db = await initDB();
 
     List ids = await db.rawQuery(
         "select * from tesis where titulo_tesis = '$name' and institucion_tesis = '$institucion' and carrera_tesis = '$carrera' and fecha_tesis = '$fecha'");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tesis_proyect/class/frames/reposToShow.dart';
+import 'package:tesis_proyect/class/frames/tesisInformation.dart';
 
 // contrasena del gmail
 //VzejEmk9Y9CzWEW
@@ -12,7 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter app',
-      home: Home(),
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => Home(),
+        'reposToShow': (BuildContext context) => ReposToShow(),
+        'tesisInformation': (BuildContext context) => tesisInformation(),
+      },
     );
   }
 }

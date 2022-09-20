@@ -48,8 +48,7 @@ class _ReposToShowState extends State<ReposToShow> {
                       name: snapshot.data!.repos![i].name,
                       htmlURL: snapshot.data!.repos![i].htmlURL,
                       description: snapshot.data!.repos![i].description));
-                  DBProvider.db
-                      .insertTesis(reposToShow[reposToShow.length - 1]);
+                  DBProvider.insertTesis(reposToShow[reposToShow.length - 1]);
                 }
 
                 return TesisOptionList(reposToShow, context);
