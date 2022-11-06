@@ -11,7 +11,7 @@ class InformationPage extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton.extended(
             heroTag: 'uniqueTag',
-            onPressed: () {},
+            onPressed: () {Navigator.pop(context);},
             label: Row(
               children: [Icon(Icons.info), Text('Informacion')],
             )),
@@ -27,8 +27,7 @@ class InformationPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Image.network(
-                        'https://www.ecured.cu/images/b/b9/Logo_ult.jpeg'),
+                    FadeInImage(height: 350,width: 350,placeholder: AssetImage('assets/loading.gif'), image: NetworkImage('https://www.ecured.cu/images/b/b9/Logo_ult.jpeg',)),
                     RichText(
                         textAlign: TextAlign.justify,
                         text: TextSpan(
@@ -90,16 +89,12 @@ class InformationPage extends StatelessWidget {
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 25)),
                             ])),
-                    Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/GitHub_logo_2013.svg/245px-GitHub_logo_2013.svg.png',
-                      height: 200,
-                      width: 200,
-                    ),
+                    FadeInImage(height: 250,width: 250,placeholder: AssetImage('assets/loading.gif'), image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/GitHub_logo_2013.svg/245px-GitHub_logo_2013.svg.png')),
                     Column(
                       children: [
                         RichText(
                           textAlign: TextAlign.justify,
-                          text: TextSpan(
+                          text: const TextSpan(
                               text:
                                   'GitHub es una forja (plataforma de desarrollo colaborativo) para alojar proyectos utilizando el sistema de control de versiones Git. Se utiliza principalmente para la creación de código fuente de programas de ordenador.'
                                   'El software que opera GitHub fue escrito en Ruby on Rails. Desde enero de 2010, GitHub opera bajo el nombre de GitHub, Inc.'
@@ -112,7 +107,7 @@ class InformationPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ))
+            )),
           ],
         ));
   }

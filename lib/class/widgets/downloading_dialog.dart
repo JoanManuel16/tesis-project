@@ -38,7 +38,11 @@ _DownloadingDialogState({@required String repo_name=''}){
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CircularProgressIndicator.adaptive(),
+          Image.asset(
+            'assets/loading.gif',
+            width: 400,
+          ),
+          //const CircularProgressIndicator.adaptive(),
           const SizedBox(
             height: 20,
           ),
