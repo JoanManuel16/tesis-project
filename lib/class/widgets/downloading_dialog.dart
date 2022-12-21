@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-
+import 'package:external_path/external_path.dart';
+import 'package:uuid/uuid.dart';
 class DownloadingDialog extends StatefulWidget {
 
 String repo_name='';
@@ -71,8 +71,6 @@ _DownloadingDialogState({@required String repo_name=''}){
         setState(() {
           progress = recivedBytes / totalBytes;
         });
-
-     
       },
       deleteOnError: true,
     ).then((_) {
@@ -81,9 +79,11 @@ _DownloadingDialogState({@required String repo_name=''}){
   }
 
   Future<String> _getFilePath(String filename) async {
-    final dir = await getApplicationDocumentsDirectory();
-    
-    return "${dir.path}/$filename";
+    //final dir = await getApplicationDocumentsDirectory();
+    String dir = await await ExternalPath.getExternalStoragePublicDirectory(
+        ExternalPath.DIRECTORY_DOWNLOADS);
+    var uuid = Uuid();
+    return "$dir/$filename-"+uuid.v4()+".pdf";
   }
 
 

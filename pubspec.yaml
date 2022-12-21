@@ -42,6 +42,8 @@ dependencies:
   sqflite: ^2.0.2+1
   url_launcher: ^6.0.10
   dio: ^4.0.6
+  external_path: ^1.0.3
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

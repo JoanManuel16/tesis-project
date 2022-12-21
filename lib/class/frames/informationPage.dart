@@ -23,6 +23,7 @@ class InformationPage extends StatelessWidget {
             Gradiente(),
             Center(
                 child: Container(
+                  padding: const EdgeInsets.all(20),
               width: 850,
               child: SingleChildScrollView(
                 child: Column(
