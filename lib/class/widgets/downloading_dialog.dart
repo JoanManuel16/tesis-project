@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:external_path/external_path.dart';
 import 'package:uuid/uuid.dart';
+import 'package:permission_handler/permission_handler.dart';
 class DownloadingDialog extends StatefulWidget {
 
 String repo_name='';
@@ -20,15 +21,20 @@ class _DownloadingDialogState extends State<DownloadingDialog> {
 
 _DownloadingDialogState({@required String repo_name=''}){
   this._repo_name=repo_name;
+  
 }
 
 
   @override
   void initState() {
     super.initState();
+   
     startDownloading(_repo_name!);
   }
-
+  Future permission()async{
+    var permission=await Permission.storage.request().isGranted;
+    return permission;
+  }
     @override
   Widget build(BuildContext context) {
     String downloadingprogress = (progress * 100).toInt().toString();
@@ -64,7 +70,10 @@ _DownloadingDialogState({@required String repo_name=''}){
     //"https://raw.githubusercontent.com/Tesis-ULT/Ficha-de-Estudiantes/main/Ficha-de-Estudiantes.pdf"
    String url= 'https://raw.githubusercontent.com/Tesis-ULT/$repo_name/main/$repo_name.pdf';
     String path = await _getFilePath(repo_name);
-    await dio.download(
+    
+    var permission=await Permission.storage.request();
+    if(permission.isGranted){
+      await dio.download(
       url,
       path,
       onReceiveProgress: (recivedBytes, totalBytes) {
@@ -76,6 +85,7 @@ _DownloadingDialogState({@required String repo_name=''}){
     ).then((_) {
       Navigator.pop(context);
     });
+    }
   }
 
   Future<String> _getFilePath(String filename) async {

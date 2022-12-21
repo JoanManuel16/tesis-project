@@ -10,7 +10,6 @@ Future<All> fetchRepos() async {
       await http.get(Uri.parse('https://api.github.com/users/Tesis-ULT/repos'));
 
   if (response.statusCode == 200) {
-    print(response.body);
     return All.fromJson(json.decode(response.body));
   } else {
     throw Exception('Failed to load album');
